@@ -58,6 +58,11 @@ int WordCount::getWordCount(std::string word) const {
 	
 int WordCount::incrWordCount(std::string word) {
 	std::string validWord = makeValidWord(word);
+
+	if (validWord.empty()) {
+		return 0;
+	}
+
 	int hashIndex = hash(validWord);
 	int vecSize = (table[hashIndex]).size();
 	
@@ -102,7 +107,7 @@ std::string WordCount::makeValidWord(std::string word) {
 	int wordSize = word.size();
 	for (int i = 0; i < wordSize; i++) {
 		char c = word.at(i);
-		if (isWordChar(c)) {
+		if(isWordChar(c)) {
 			result += std::tolower(c);
 		}
 		else if (((c == '\'') || (c == '-')) && (i > 0) && (i < wordSize -1)) {
